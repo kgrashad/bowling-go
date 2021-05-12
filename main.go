@@ -17,6 +17,10 @@ func (g *Game) Score() (score int) {
 			score += g.rolls[i+2]
 		}
 
+		if isStrike(g.rolls, i) {
+			score += g.rolls[i+1] + g.rolls[i+2]
+		}
+
 		score += g.rolls[i]
 	}
 
@@ -25,4 +29,8 @@ func (g *Game) Score() (score int) {
 
 func isSpare(rolls []int, i int) bool {
 	return i < len(rolls)-2 && i%2 == 0 && rolls[i]+rolls[i+1] == 10
+}
+
+func isStrike(rolls []int, i int) bool {
+	return i < len(rolls)-2 && rolls[i] == 10
 }

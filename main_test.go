@@ -38,6 +38,13 @@ func TestBowling(t *testing.T) {
 
 		assertScore(want, got, t)
 	})
+
+	t.Run("Strike roll should return 10 plus next two rolls", func(t *testing.T) {
+		got := rollAndGetScore(10, 2, 3)
+		want := 20
+
+		assertScore(want, got, t)
+	})
 }
 
 func rollAndGetScore(rolls ...int) (score int) {
