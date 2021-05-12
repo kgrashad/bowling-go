@@ -17,6 +17,13 @@ func TestBowling(t *testing.T) {
 
 		assertScore(want, got, t)
 	})
+
+	t.Run("Spare roll should return sum of pins and next roll", func(t *testing.T) {
+		got := rollAndGetScore(4, 6, 3)
+		want := 16
+
+		assertScore(want, got, t)
+	})
 }
 
 func rollAndGetScore(rolls ...int) (score int) {
