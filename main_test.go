@@ -24,6 +24,13 @@ func TestBowling(t *testing.T) {
 
 		assertScore(want, got, t)
 	})
+
+	t.Run("10 pins roll across two frame should not add next roll", func(t *testing.T) {
+		got := rollAndGetScore(0, 6, 4, 2)
+		want := 12
+
+		assertScore(want, got, t)
+	})
 }
 
 func rollAndGetScore(rolls ...int) (score int) {
