@@ -13,7 +13,7 @@ func (g *Game) Score() (score int) {
 
 	for i := 0; i < count; i++ {
 
-		if i < count-2 && i%2 == 0 && g.rolls[i]+g.rolls[i+1] == 10 {
+		if isSpare(g.rolls, i) {
 			score += g.rolls[i+2]
 		}
 
@@ -21,4 +21,8 @@ func (g *Game) Score() (score int) {
 	}
 
 	return
+}
+
+func isSpare(rolls []int, i int) bool {
+	return i < len(rolls)-2 && i%2 == 0 && rolls[i]+rolls[i+1] == 10
 }
