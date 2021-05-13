@@ -21,10 +21,10 @@ func (g *Game) Score() (score int) {
 	for i := 0; i < NumberOfFrames; i++ {
 
 		if g.isSpare(rollIndex) {
-			score += 10 + g.rolls[rollIndex+2]
+			score += MaxRollScore + g.rolls[rollIndex+2]
 			rollIndex += 2
 		} else if g.isStrike(rollIndex) {
-			score += 10 + g.rolls[rollIndex+1] + g.rolls[rollIndex+2]
+			score += MaxRollScore + g.rolls[rollIndex+1] + g.rolls[rollIndex+2]
 			rollIndex++
 		} else {
 			score += g.rolls[rollIndex] + g.rolls[rollIndex+1]
