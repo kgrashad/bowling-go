@@ -65,6 +65,12 @@ func TestBowling(t *testing.T) {
 		err := game.Roll(-1)
 		assertError(ErrInvalidPinCount, err, t)
 	})
+
+	t.Run("Above 10 roll pins returns an error", func(t *testing.T) {
+		game := Game{}
+		err := game.Roll(11)
+		assertError(ErrInvalidPinCount, err, t)
+	})
 }
 
 func rollAndGetScore(rolls ...int) (score int) {

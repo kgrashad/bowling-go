@@ -20,7 +20,7 @@ type Game struct {
 }
 
 func (g *Game) Roll(pins int) error {
-	if pins < 0 {
+	if pins < 0 || pins > 10 {
 		return ErrInvalidPinCount
 	}
 
