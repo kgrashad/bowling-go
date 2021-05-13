@@ -6,6 +6,12 @@ const (
 	MaxRollScore   int = 10
 )
 
+const (
+	ErrInvalidPinCount = BowlingErr("invalid pin count, should be 0-10")
+)
+
+type BowlingErr string
+
 type BowlingRolls [MaxRolls]int
 
 type Game struct {
@@ -13,9 +19,14 @@ type Game struct {
 	rollCount int
 }
 
-func (g *Game) Roll(pins int) {
+func (g *Game) Roll(pins int) error {
+	if pins < 0 {
+		return ErrInvalidPinCount
+	}
+
 	g.rolls[g.rollCount] = pins
 	g.rollCount++
+	return nil
 }
 
 func (g *Game) Score() (score int) {
@@ -43,4 +54,8 @@ func (g *Game) isSpare(i int) bool {
 
 func (g *Game) isStrike(i int) bool {
 	return g.rolls[i] == MaxRollScore
+}
+
+func (e BowlingErr) Error() string {
+	return string(e)
 }

@@ -59,6 +59,12 @@ func TestBowling(t *testing.T) {
 
 		assertScore(want, got, t)
 	})
+
+	t.Run("Negative roll pins returns an error", func(t *testing.T) {
+		game := Game{}
+		err := game.Roll(-1)
+		assertError(ErrInvalidPinCount, err, t)
+	})
 }
 
 func rollAndGetScore(rolls ...int) (score int) {
@@ -72,6 +78,12 @@ func rollAndGetScore(rolls ...int) (score int) {
 }
 
 func assertScore(want, got int, t *testing.T) {
+	if want != got {
+		t.Errorf("got %v, want %v", got, want)
+	}
+}
+
+func assertError(want, got error, t *testing.T) {
 	if want != got {
 		t.Errorf("got %v, want %v", got, want)
 	}
