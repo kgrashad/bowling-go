@@ -52,6 +52,13 @@ func TestBowling(t *testing.T) {
 
 		assertScore(want, got, t)
 	})
+
+	t.Run("Perfect game returns 300 score", func(t *testing.T) {
+		got := rollAndGetScore(10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10)
+		want := 300
+
+		assertScore(want, got, t)
+	})
 }
 
 func rollAndGetScore(rolls ...int) (score int) {
