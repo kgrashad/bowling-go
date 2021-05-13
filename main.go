@@ -7,23 +7,23 @@ const MaxRollScore int = 10
 type BowlingRolls [MaxRolls]int
 
 type Game struct {
-	rolls      BowlingRolls
-	rollsCount int
+	rolls     BowlingRolls
+	rollCount int
 }
 
 func (g *Game) Roll(pins int) {
-	g.rolls[g.rollsCount] = pins
-	g.rollsCount++
+	g.rolls[g.rollCount] = pins
+	g.rollCount++
 }
 
 func (g *Game) Score() (score int) {
 	rollIndex := 0
 	for i := 0; i < NumberOfFrames; i++ {
 
-		if isSpare(g.rolls, rollIndex) {
+		if g.isSpare(rollIndex) {
 			score += 10 + g.rolls[rollIndex+2]
 			rollIndex += 2
-		} else if isStrike(g.rolls, rollIndex) {
+		} else if g.isStrike(rollIndex) {
 			score += 10 + g.rolls[rollIndex+1] + g.rolls[rollIndex+2]
 			rollIndex++
 		} else {
@@ -35,10 +35,10 @@ func (g *Game) Score() (score int) {
 	return
 }
 
-func isSpare(rolls BowlingRolls, i int) bool {
-	return rolls[i]+rolls[i+1] == MaxRollScore
+func (g *Game) isSpare(i int) bool {
+	return g.rolls[i]+g.rolls[i+1] == MaxRollScore
 }
 
-func isStrike(rolls BowlingRolls, i int) bool {
-	return rolls[i] == MaxRollScore
+func (g *Game) isStrike(i int) bool {
+	return g.rolls[i] == MaxRollScore
 }
