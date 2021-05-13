@@ -1,8 +1,10 @@
 package bowling
 
-const MaxRolls int = 22
-const NumberOfFrames int = 10
-const MaxRollScore int = 10
+const (
+	MaxRolls       int = 22
+	NumberOfFrames int = 10
+	MaxRollScore   int = 10
+)
 
 type BowlingRolls [MaxRolls]int
 
