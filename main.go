@@ -8,6 +8,7 @@ const (
 
 const (
 	ErrInvalidPinCount = BowlingErr("invalid pin count, should be 0-10")
+	ErrTooManyRolls    = BowlingErr("you can't roll more than 12 times per game")
 )
 
 type BowlingErr string
@@ -22,6 +23,10 @@ type Game struct {
 func (g *Game) Roll(pins int) error {
 	if pins < 0 || pins > 10 {
 		return ErrInvalidPinCount
+	}
+
+	if g.rollCount == 12 {
+		return ErrTooManyRolls
 	}
 
 	g.rolls[g.rollCount] = pins
